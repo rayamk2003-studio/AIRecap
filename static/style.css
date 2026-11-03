@@ -28,3 +28,19 @@ button{
 #result{
     margin-top:20px;
 }
+.success-card{
+    margin-top:20px;
+    padding:18px;
+    border-radius:12px;
+    background:#ecfdf5;
+    border:1px solid #10b981;
+}
+
+.success-card h3{
+    color:#059669;
+    margin-top:0;
+}
+
+.success-card p{
+    margin:8px 0;
+}
