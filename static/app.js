@@ -7,9 +7,40 @@ document
     const file =
         document.getElementById("fileInput").files[0];
 
-    if (!file) {
-        return;
-    }
+    if (!file) return;
+
+    const progressContainer =
+        document.getElementById("progress-container");
+
+    const progressFill =
+        document.getElementById("progress-fill");
+
+    const progressText =
+        document.getElementById("progress-text");
+
+    progressContainer.style.display = "block";
+
+    let progress = 0;
+
+    const fakeProgress = setInterval(() => {
+
+        progress += 25;
+
+        if (progress > 100) {
+            progress = 100;
+        }
+
+        progressFill.style.width =
+            progress + "%";
+
+        progressText.innerText =
+            progress + "%";
+
+        if (progress === 100) {
+            clearInterval(fakeProgress);
+        }
+
+    }, 500);
 
     const formData = new FormData();
     formData.append("file", file);
@@ -24,10 +55,8 @@ document
     const sizeMB =
         (file.size / 1024 / 1024).toFixed(2);
 
-    const now = new Date();
-
     const uploadTime =
-        now.toLocaleString();
+        new Date().toLocaleString();
 
     document.getElementById("result").innerHTML = `
         <div class="success-card">
