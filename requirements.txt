@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+python-multipart
+jinja2
+google-genai
+faster-whisper
+moviepy
+imageio-ffmpeg
+soundfile
+numpy
+scipy
+myanmartts
+python-dotenv
