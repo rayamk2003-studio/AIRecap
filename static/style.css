@@ -44,3 +44,22 @@ button{
 .success-card p{
     margin:8px 0;
 }
+
+.success-card {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ecfdf5;
+    border-left: 6px solid #10b981;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.success-card h3 {
+    margin-top: 0;
+    color: #059669;
+}
+
+.success-card p {
+    margin: 10px 0;
+    color: #333;
+}
