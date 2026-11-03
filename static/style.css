@@ -85,3 +85,20 @@ button{
     margin-top: 10px;
     font-weight: bold;
 }
+
+.history-card{
+    margin-top:10px;
+    padding:12px;
+    border-radius:10px;
+    background:white;
+    border:1px solid #ddd;
+}
+
+.history-card strong{
+    color:#2563eb;
+}
+
+hr{
+    margin-top:25px;
+    margin-bottom:15px;
+}
