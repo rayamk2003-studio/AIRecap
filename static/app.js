@@ -5,7 +5,11 @@ document
     e.preventDefault();
 
     const file =
-    document.getElementById("fileInput").files[0];
+        document.getElementById("fileInput").files[0];
+
+    if (!file) {
+        return;
+    }
 
     const formData = new FormData();
     formData.append("file", file);
@@ -17,6 +21,17 @@ document
 
     const data = await response.json();
 
-    document.getElementById("result").innerHTML =
-        `<p>✅ Uploaded: ${data.filename}</p>`;
+    const sizeMB = (file.size / 1024 / 1024).toFixed(2);
+
+    document.getElementById("result").innerHTML = `
+        <div class="success-card">
+            <h3>✅ Upload Successful</h3>
+
+            <p><strong>File:</strong> ${data.filename}</p>
+
+            <p><strong>Size:</strong> ${sizeMB} MB</p>
+
+            <p><strong>Status:</strong> Ready for Processing</p>
+        </div>
+    `;
 });
