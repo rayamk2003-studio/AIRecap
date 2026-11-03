@@ -1,84 +1,45 @@
-\## Project Status
+\# 🎬 AIRecap
 
 
 
-\### Current Version
+!\[Status](https://img.shields.io/badge/Status-Active%20Development-brightgreen)
 
-\*\*v1.5 Stable\*\*
+!\[Version](https://img.shields.io/badge/Version-v1.5-blue)
 
+!\[Python](https://img.shields.io/badge/Python-3.10+-yellow)
 
+!\[FastAPI](https://img.shields.io/badge/FastAPI-Web%20Framework-009688)
 
-\### Development Status
-
-🟢 Active Development
-
-
-
-\### Completed Features
+!\[GitHub](https://img.shields.io/badge/GitHub-Repository-black)
 
 
 
-\- ✅ Web-based interface
-
-\- ✅ Video upload
-
-\- ✅ Speech transcription
-
-\- ✅ AI summarization
-
-\- ✅ Text-to-speech generation
-
-\- ✅ Video recap generation
-
-\- ✅ GitHub repository integration
-
-\- ✅ README documentation
+> Automatically generate AI-powered video recaps from uploaded videos.
+## 📊 Project Status
 
 
 
-\### In Progress
+| Component | Status |
 
+|------------|---------|
 
+| Web Interface | ✅ Complete |
 
-\- 🔄 Real-time progress tracking
+| Video Upload | ✅ Complete |
 
-\- 🔄 Better error handling
+| Transcription | ✅ Complete |
 
-\- 🔄 UI improvements
+| Summarization | ✅ Complete |
 
+| TTS | ✅ Complete |
 
+| Video Editing | ✅ Complete |
 
-\### Planned Features
+| GitHub Integration | ✅ Complete |
 
+| Progress Tracking | 🔄 In Progress |
 
+| Multi-language Support | 📋 Planned |
 
-\- 📋 Multi-language support
-
-\- 📋 AI highlight detection
-
-\- 📋 Video preview support
-
-\- 📋 Download history
-
-\- 📋 Cloud deployment
-
-
-
-\### Repository Status
-
-
-
-\- ✅ Git repository initialized
-
-\- ✅ GitHub remote connected
-
-\- ✅ README completed
-
-\- ✅ Large file issue resolved
-
-\- ✅ Repository synchronized with GitHub
-
-
-
-Last Updated: November 2026
+| Cloud Deployment | 📋 Planned |
 
