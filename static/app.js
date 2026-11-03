@@ -21,17 +21,31 @@ document
 
     const data = await response.json();
 
-    const sizeMB = (file.size / 1024 / 1024).toFixed(2);
+    const sizeMB =
+        (file.size / 1024 / 1024).toFixed(2);
+
+    const now = new Date();
+
+    const uploadTime =
+        now.toLocaleString();
 
     document.getElementById("result").innerHTML = `
         <div class="success-card">
+
             <h3>✅ Upload Successful</h3>
 
-            <p><strong>File:</strong> ${data.filename}</p>
+            <p><strong>📄 Filename:</strong>
+            ${data.filename}</p>
 
-            <p><strong>Size:</strong> ${sizeMB} MB</p>
+            <p><strong>📦 File Size:</strong>
+            ${sizeMB} MB</p>
 
-            <p><strong>Status:</strong> Ready for Processing</p>
+            <p><strong>🕒 Upload Time:</strong>
+            ${uploadTime}</p>
+
+            <p><strong>🚀 Status:</strong>
+            Ready for Processing</p>
+
         </div>
     `;
 });
