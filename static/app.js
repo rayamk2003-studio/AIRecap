@@ -5,7 +5,7 @@ let uploadHistory =
     ) || [];
 
 
-// Render history list
+// Render upload history
 function renderHistory() {
 
     let historyHTML = "";
@@ -32,14 +32,14 @@ function renderHistory() {
 }
 
 
-// Load previous history on page load
+// Load history when page opens
 renderHistory();
 
 
 // Upload handler
 document
     .getElementById("uploadForm")
-    .addEventListener("submit", async (e) => {
+    .addEventListener("submit", (e) => {
 
         e.preventDefault();
 
@@ -62,91 +62,105 @@ document
         progressFill.style.width = "0%";
         progressText.innerText = "0%";
 
-        let progress = 0;
-
-        const fakeProgress = setInterval(() => {
-
-            progress += 25;
-
-            if (progress > 100) {
-                progress = 100;
-            }
-
-            progressFill.style.width =
-                progress + "%";
-
-            progressText.innerText =
-                progress + "%";
-
-            if (progress === 100) {
-                clearInterval(fakeProgress);
-            }
-
-        }, 500);
-
         const formData = new FormData();
         formData.append("file", file);
 
-        const response = await fetch("/upload", {
-            method: "POST",
-            body: formData
+        // Real Upload Progress
+        const xhr = new XMLHttpRequest();
+
+        xhr.upload.addEventListener("progress", (e) => {
+
+            if (e.lengthComputable) {
+
+                const percent = Math.round(
+                    (e.loaded / e.total) * 100
+                );
+
+                progressFill.style.width =
+                    percent + "%";
+
+                progressText.innerText =
+                    percent + "%";
+            }
         });
 
-        const data = await response.json();
+        xhr.onload = function () {
 
-        const sizeMB =
-            (file.size / 1024 / 1024).toFixed(2);
+            if (xhr.status !== 200) {
 
-        const uploadTime =
-            new Date().toLocaleString();
+                alert("Upload failed.");
 
-        // Success Card
-        document.getElementById("result").innerHTML = `
-            <div class="success-card">
+                return;
+            }
 
-                <h3>✅ Upload Successful</h3>
+            const data =
+                JSON.parse(xhr.responseText);
 
-                <p>
-                    <strong>📄 Filename:</strong>
-                    ${data.filename}
-                </p>
+            const sizeMB =
+                (file.size / 1024 / 1024).toFixed(2);
 
-                <p>
-                    <strong>📦 File Size:</strong>
-                    ${sizeMB} MB
-                </p>
+            const uploadTime =
+                new Date().toLocaleString();
 
-                <p>
-                    <strong>🕒 Upload Time:</strong>
-                    ${uploadTime}
-                </p>
+            // Success Card
+            document.getElementById("result").innerHTML = `
+                <div class="success-card">
 
-                <p>
-                    <strong>🚀 Status:</strong>
-                    Ready for Processing
-                </p>
+                    <h3>✅ Upload Successful</h3>
 
-            </div>
-        `;
+                    <p>
+                        <strong>📄 Filename:</strong>
+                        ${data.filename}
+                    </p>
 
-        // Save to history
-        uploadHistory.unshift({
-            filename: data.filename,
-            size: sizeMB,
-            time: uploadTime
-        });
+                    <p>
+                        <strong>📦 File Size:</strong>
+                        ${sizeMB} MB
+                    </p>
 
-        // Limit history to newest 10 uploads
-        if (uploadHistory.length > 10) {
-            uploadHistory = uploadHistory.slice(0, 10);
-        }
+                    <p>
+                        <strong>🕒 Upload Time:</strong>
+                        ${uploadTime}
+                    </p>
 
-        // Save browser storage
-        localStorage.setItem(
-            "uploadHistory",
-            JSON.stringify(uploadHistory)
-        );
+                    <p>
+                        <strong>🚀 Status:</strong>
+                        Ready for Processing
+                    </p>
 
-        // Refresh UI
-        renderHistory();
+                </div>
+            `;
+
+            // Save upload history
+            uploadHistory.unshift({
+                filename: data.filename,
+                size: sizeMB,
+                time: uploadTime
+            });
+
+            // Keep latest 10 items
+            if (uploadHistory.length > 10) {
+
+                uploadHistory =
+                    uploadHistory.slice(0, 10);
+            }
+
+            // Save to localStorage
+            localStorage.setItem(
+                "uploadHistory",
+                JSON.stringify(uploadHistory)
+            );
+
+            // Refresh history UI
+            renderHistory();
+        };
+
+        xhr.onerror = function () {
+
+            alert("Upload error.");
+        };
+
+        xhr.open("POST", "/upload");
+
+        xhr.send(formData);
     });
