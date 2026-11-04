@@ -9,17 +9,41 @@
 <div class="container">
 
     <h1>🎬 AIRecap</h1>
+
     <p>Upload a video to begin recap generation.</p>
 
     <form id="uploadForm">
-        <input type="file" id="fileInput" required>
-        <button type="submit">Upload Video</button>
+
+        <input type="file"
+               id="fileInput"
+               accept="video/*"
+               required>
+
+        <button type="submit">
+            Upload Video
+        </button>
+
     </form>
 
-    <div id="progress-container" style="display:none;">
+    <div id="preview-container"
+         style="display:none;">
+
+        <h3>🎥 Video Preview</h3>
+
+        <video id="videoPreview"
+               controls
+               width="100%">
+        </video>
+
+    </div>
+
+    <div id="progress-container"
+         style="display:none;">
 
         <div class="progress-bar">
+
             <div id="progress-fill"></div>
+
         </div>
 
         <p id="progress-text">0%</p>
