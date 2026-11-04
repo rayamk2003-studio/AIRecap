@@ -1,5 +1,42 @@
-const uploadHistory = [];
+// Load saved history from localStorage
+let uploadHistory =
+    JSON.parse(
+        localStorage.getItem("uploadHistory")
+    ) || [];
 
+
+// Render history list
+function renderHistory() {
+
+    let historyHTML = "";
+
+    uploadHistory.forEach((item, index) => {
+
+        historyHTML += `
+            <div class="history-card">
+
+                <strong>
+                    ${index + 1}. ${item.filename}
+                </strong>
+
+                <p>📦 ${item.size} MB</p>
+
+                <p>🕒 ${item.time}</p>
+
+            </div>
+        `;
+    });
+
+    document.getElementById("history").innerHTML =
+        historyHTML;
+}
+
+
+// Load previous history on page load
+renderHistory();
+
+
+// Upload handler
 document
     .getElementById("uploadForm")
     .addEventListener("submit", async (e) => {
@@ -69,47 +106,47 @@ document
 
                 <h3>✅ Upload Successful</h3>
 
-                <p><strong>📄 Filename:</strong>
-                ${data.filename}</p>
+                <p>
+                    <strong>📄 Filename:</strong>
+                    ${data.filename}
+                </p>
 
-                <p><strong>📦 File Size:</strong>
-                ${sizeMB} MB</p>
+                <p>
+                    <strong>📦 File Size:</strong>
+                    ${sizeMB} MB
+                </p>
 
-                <p><strong>🕒 Upload Time:</strong>
-                ${uploadTime}</p>
+                <p>
+                    <strong>🕒 Upload Time:</strong>
+                    ${uploadTime}
+                </p>
 
-                <p><strong>🚀 Status:</strong>
-                Ready for Processing</p>
+                <p>
+                    <strong>🚀 Status:</strong>
+                    Ready for Processing
+                </p>
 
             </div>
         `;
 
-        // Upload History
+        // Save to history
         uploadHistory.unshift({
             filename: data.filename,
             size: sizeMB,
             time: uploadTime
         });
 
-        let historyHTML = "";
+        // Limit history to newest 10 uploads
+        if (uploadHistory.length > 10) {
+            uploadHistory = uploadHistory.slice(0, 10);
+        }
 
-        uploadHistory.forEach((item, index) => {
+        // Save browser storage
+        localStorage.setItem(
+            "uploadHistory",
+            JSON.stringify(uploadHistory)
+        );
 
-            historyHTML += `
-                <div class="history-card">
-
-                    <strong>
-                        ${index + 1}. ${item.filename}
-                    </strong>
-
-                    <p>📦 ${item.size} MB</p>
-
-                    <p>🕒 ${item.time}</p>
-
-                </div>
-            `;
-        });
-
-        document.getElementById("history").innerHTML =
-            historyHTML;
+        // Refresh UI
+        renderHistory();
     });
