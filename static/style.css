@@ -102,3 +102,49 @@ hr{
     margin-top:25px;
     margin-bottom:15px;
 }
+
+#preview-container{
+    margin-top:20px;
+}
+
+#videoPreview{
+    width:100%;
+    border-radius:10px;
+    background:black;
+    max-height:300px;
+}
+
+.history-card{
+    margin-top:10px;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+.success-card{
+    margin-top:20px;
+    padding:20px;
+    background:#ecfdf5;
+    border-left:6px solid #10b981;
+    border-radius:10px;
+}
+
+.progress-bar{
+    width:100%;
+    height:25px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+#progress-fill{
+    width:0%;
+    height:100%;
+    background:#2563eb;
+}
+
+#progress-text{
+    text-align:center;
+    font-weight:bold;
+}
